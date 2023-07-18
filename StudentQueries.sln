@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Student.Queries", "Student.Queries\Student.Queries.csproj", "{440BCF96-4677-44ED-8A74-38A6B5D241AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FC182C46-D734-4163-A3C1-EBB748C8B629}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Student.Tests", "Student.Tests\Student.Tests.csproj", "{08DE9E62-BC57-4926-8503-D084CA00DDE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Student.Live.Tests", "Student.Live.Tests\Student.Live.Tests.csproj", "{D3860E80-AC39-4EE5-A960-E7FB3EF53C0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{440BCF96-4677-44ED-8A74-38A6B5D241AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{440BCF96-4677-44ED-8A74-38A6B5D241AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{440BCF96-4677-44ED-8A74-38A6B5D241AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{440BCF96-4677-44ED-8A74-38A6B5D241AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08DE9E62-BC57-4926-8503-D084CA00DDE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08DE9E62-BC57-4926-8503-D084CA00DDE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08DE9E62-BC57-4926-8503-D084CA00DDE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08DE9E62-BC57-4926-8503-D084CA00DDE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3860E80-AC39-4EE5-A960-E7FB3EF53C0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3860E80-AC39-4EE5-A960-E7FB3EF53C0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3860E80-AC39-4EE5-A960-E7FB3EF53C0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3860E80-AC39-4EE5-A960-E7FB3EF53C0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{08DE9E62-BC57-4926-8503-D084CA00DDE8} = {FC182C46-D734-4163-A3C1-EBB748C8B629}
+		{D3860E80-AC39-4EE5-A960-E7FB3EF53C0B} = {FC182C46-D734-4163-A3C1-EBB748C8B629}
+	EndGlobalSection
+EndGlobal

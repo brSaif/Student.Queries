@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Student.Query.StudentProto";
+
+package student.query;
+
+service Students{
+  rpc Filter(FilterRequest) returns (FilterResponse);
+  rpc Find(FindRequest) returns (StudentResult);
+}
+
+message FilterRequest{
+  int32 page = 1;
+  int32 size = 2;
+  google.protobuf.Timestamp created_after = 3;
+}
+
+message FindRequest{
+  string id = 1;
+}
+
+message FilterResponse{
+  int32 page = 1;
+  int32 size = 2;
+  int32 total = 3;
+  repeated StudentResult Students = 4;
+}
+
+message StudentResult{
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string PhoneNumber = 4;
+}
