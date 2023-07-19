@@ -19,7 +19,7 @@ public class StudentUpdatedHandler : IRequestHandler<StudentUpdated, bool>
 
     public async Task<bool> Handle(StudentUpdated request, CancellationToken cancellationToken)
     {
-            var student = await _unitOfWork.StudentRepository.GetById(request.AggregateId);
+            var student = await _unitOfWork.StudentRepository.GetByIdAsync(request.AggregateId);
             if (student is null)
             {
                 _logger.LogInformation($"Student with aggregate id: '{request.AggregateId}' not found");
@@ -42,6 +42,7 @@ public class StudentUpdatedHandler : IRequestHandler<StudentUpdated, bool>
             student.Apply(request);
 
             await _unitOfWork.SaveChangesAsync();
+            var stuent = await _unitOfWork.StudentRepository.GetByIdAsync(student.Id);
             _logger.LogInformation($"Student with aggregate id: '{request.AggregateId}' successfully updated");
             return true;
 

@@ -9,7 +9,7 @@ namespace StudentQueries.Data;
 
 public interface IStudentRepository
 {
-    Task<Domain.Student?> GetById(Guid studentId);
+    Task<Domain.Student?> GetByIdAsync(Guid studentId);
     Task AddAsync(Domain.Student student);
     Task<FilterResult> FilterAsync(FilterQuery filter, CancellationToken cancellationToken = default);
     Task<Domain.Student?> FindAsync(Guid id, CancellationToken cancellationToken = default);
@@ -24,7 +24,7 @@ public class StudentRepository : IStudentRepository
         _appDbContext = appDbContext;
     }
 
-    public async Task<Domain.Student?> GetById(Guid studentId)
+    public async Task<Domain.Student?> GetByIdAsync(Guid studentId)
         => await _appDbContext.Students.FindAsync(studentId);
 
     public async Task AddAsync(Domain.Student student)

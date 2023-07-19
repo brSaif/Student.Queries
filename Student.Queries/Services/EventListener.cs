@@ -12,17 +12,18 @@ using StudentQueries.UpdateStudent;
 
 namespace StudentQueries.Services;
 
-public class EventListener : IHostedService
+public class EventListener : IHostedService, IDisposable
 {
     private readonly IServiceProvider _sp;
-    private readonly ServiceBusClient _serviceBusClient;
     private readonly ServiceBusSessionProcessor _processor;
     // private readonly object syncRoot = new();
 
-    public EventListener(IConfiguration configuration, IServiceProvider sp)
+    public EventListener(
+        ServiceBusClient client, 
+        IServiceProvider sp
+        )
     {
         _sp = sp;
-        _serviceBusClient = new ServiceBusClient(configuration["ServiceBus:ConnectionString"]);
 
         var options = new ServiceBusSessionProcessorOptions
         {
@@ -30,10 +31,12 @@ public class EventListener : IHostedService
             PrefetchCount = 1,
             MaxConcurrentCallsPerSession = 1,
             MaxConcurrentSessions = 100,
+            ReceiveMode = ServiceBusReceiveMode.PeekLock
         };
 
-        _processor = _serviceBusClient.CreateSessionProcessor(
-            "brseif", "es-demo-queries", options);
+        _processor = client.CreateSessionProcessor(
+            "brseif", 
+            "es-demo-queries", options);
 
         // configure the message and error handler to use .
         _processor.ProcessMessageAsync += Processor_ProcessMessageAsync;
@@ -97,4 +100,9 @@ public class EventListener : IHostedService
 
     public Task StopAsync(CancellationToken cancellationToken)
         => _processor.StopProcessingAsync(cancellationToken);
+
+    public void Dispose()
+    {
+        _processor.DisposeAsync();
+    }
 }

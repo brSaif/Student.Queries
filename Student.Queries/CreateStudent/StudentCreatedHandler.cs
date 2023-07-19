@@ -26,7 +26,7 @@ public class StudentCreatedHandler : IRequestHandler<StudentCreated, bool>
                 throw new InvalidSequenceNumberException(request.Sequence);
             }
 
-            var student = await _unitOfWork.StudentRepository.GetById(request.AggregateId);
+            var student = await _unitOfWork.StudentRepository.GetByIdAsync(request.AggregateId);
 
 
             if (student is not null)
@@ -35,8 +35,8 @@ public class StudentCreatedHandler : IRequestHandler<StudentCreated, bool>
                 throw new StudentAlreadyExistException(request.AggregateId);
             }
         
-            student = Domain.Student.FromCreatedEvent(request);
-            await _unitOfWork.StudentRepository.AddAsync(student);
+            var student2 = Domain.Student.FromCreatedEvent(request);
+            await _unitOfWork.StudentRepository.AddAsync(student2);
             await _unitOfWork.SaveChangesAsync();
             return true;
     }

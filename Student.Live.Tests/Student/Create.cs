@@ -1,8 +1,10 @@
 ﻿using Grpc.Net.Client;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using StudentEvents.Tests;
 using StudentQueries.Data;
+using StudentQueries.Services;
 using StudentQueries.Tests;
 using Xunit.Abstractions;
 
@@ -10,7 +12,7 @@ namespace Student.Live.Tests.Student;
 
 public class Create : TestBase
 {
-    public const int Delay = 5_000;
+    public const int Delay = 3_000;
     public Create(ITestOutputHelper output) : base(output)
     {
     }
@@ -20,7 +22,8 @@ public class Create : TestBase
     {
         
         var grpcClient = new DemoEvents.DemoEventsClient(GrpcChannel.ForAddress("https://localhost:5001"));
-        
+        using var scope = Factory.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         var studentId = Guid.NewGuid();
         var request = new CreateRequest()
         {
@@ -34,8 +37,7 @@ public class Create : TestBase
 
         await Task.Delay(Delay);
 
-        using var scope = Factory.Services.CreateScope();
-        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        await Factory.Services.GetRequiredService<IHostedService>().StopAsync(new CancellationToken(false));
 
         var response = await context.Students.FirstAsync(x => x.Id == studentId);
         

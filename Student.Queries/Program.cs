@@ -9,7 +9,7 @@ using StudentQueries.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHostedService<EventListener>();
+// builder.Services.AddHostedService<EventListener>();
 
 var connectionString = builder.Configuration.GetConnectionString("MssqlDatabase");
 
@@ -32,6 +32,8 @@ builder.Services.AddMediatR(opt
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddGrpcWithValidators();
+
+builder.Services.AddSingleton<IHostedService, EventListener>();
 
 var app = builder.Build();
 
