@@ -3,6 +3,7 @@ using Azure.Messaging.ServiceBus;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Student.Query.EventHistory;
 using StudentQueries.Data;
 using StudentQueries.Extensions;
 using StudentQueries.Services;
@@ -33,11 +34,16 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddGrpcWithValidators();
 
+builder.Services.AddGrpcClient<EventHistory.EventHistoryClient>(
+    options => options.Address = new Uri("https://localhost:5001") 
+        );
+
 builder.Services.AddSingleton<IHostedService, EventListener>();
 
 var app = builder.Build();
 
 app.MapGrpcService<StudentQueries.Services.StudentQueries>();
+app.MapGrpcService<StudentQueries.Services.TriggerHistoryBuild>();
 
 
 // Configure the HTTP request pipeline.

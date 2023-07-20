@@ -1,13 +1,11 @@
-﻿using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Text;
+﻿using System.Text;
 using Azure.Messaging.ServiceBus;
 using MediatR;
-using Newtonsoft.Json;
 using StudentQueries.CreateStudent;
 using StudentQueries.Exceptions;
 using StudentQueries.Exceptions.Create;
 using StudentQueries.Exceptions.Update;
+using StudentQueries.Extensions;
 using StudentQueries.UpdateStudent;
 
 namespace StudentQueries.Services;
@@ -78,16 +76,13 @@ public class EventListener : IHostedService, IDisposable
         
         return argMessage.Subject switch
         {
-            nameof(StudentCreated) => await mediatr.Send(Deserialize<StudentCreated>(json)),
-            nameof(StudentUpdated) => await mediatr.Send(Deserialize<StudentUpdated>(json)),
+            nameof(StudentCreated) => await mediatr.Send(json.Deserialize<StudentCreated>()),
+            nameof(StudentUpdated) => await mediatr.Send(json.Deserialize<StudentUpdated>()),
             _ => false
         };
     }
 
-    public static TEvent Deserialize<TEvent>(string json) 
-        => JsonConvert.DeserializeObject<TEvent>(json) 
-           ?? throw new ArgumentException("Deserialization failed");
-    
+   
     private Task Processor_ProcessErrorAsync(ProcessErrorEventArgs arg)
     {
         throw arg.Exception;

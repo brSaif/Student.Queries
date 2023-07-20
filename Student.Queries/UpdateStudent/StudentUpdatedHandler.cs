@@ -42,7 +42,6 @@ public class StudentUpdatedHandler : IRequestHandler<StudentUpdated, bool>
             student.Apply(request);
 
             await _unitOfWork.SaveChangesAsync();
-            var stuent = await _unitOfWork.StudentRepository.GetByIdAsync(student.Id);
             _logger.LogInformation($"Student with aggregate id: '{request.AggregateId}' successfully updated");
             return true;
 

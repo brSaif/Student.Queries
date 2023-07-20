@@ -33,6 +33,18 @@
     </ItemGroup>
     <ItemGroup>
         <protobuf Include="Protos/StudentQuery.proto" GrpcServices="Server" />
+        <protobuf Include="Protos/EventHistory.proto" GrpcServices="client" />
+        <Protobuf Include="Protos\TriggerBuild.proto">
+          <GrpcServices>Server</GrpcServices>
+          <Access>Public</Access>
+          <ProtoCompile>True</ProtoCompile>
+          <CompileOutputs>True</CompileOutputs>
+          <OutputDir>obj\Debug\net7.0\</OutputDir>
+          <Generator>MSBuild:Compile</Generator>
+        </Protobuf>
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="BuildStateFromHistory" />
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+
+option csharp_namespace = "Student.Query.TriggerBuild";
+
+package student.query;
+
+service TriggerBuild{
+  rpc Build(Empty) returns (Empty);
+}
+
+message Empty{}
