@@ -3,7 +3,7 @@
 public class InvalidSequenceNumberException : StudentException
 {
     public InvalidSequenceNumberException(int sequence) 
-        : base($"Invalid sequence number '{sequence}'")
+        : base(string.Format(Phrases.InvalidSequenceNumberException, sequence))
     {
     }
 }

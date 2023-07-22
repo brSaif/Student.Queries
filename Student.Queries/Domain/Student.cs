@@ -1,4 +1,5 @@
 ﻿using StudentQueries.CreateStudent;
+using StudentQueries.Services;
 using StudentQueries.UpdateStudent;
 
 namespace StudentQueries.Domain;
@@ -24,7 +25,7 @@ public class Student
         LastUpdated = DateTime.UtcNow;
     }
 
-    public static Student FromCreatedEvent(StudentCreated @event)
+    public static Student FromCreatedEvent(MessageBody<StudentCreatedData> @event)
         => new (
             @event.AggregateId,
             @event.Sequence,
@@ -33,7 +34,7 @@ public class Student
             @event.Data.PhoneNumber
             );
 
-    public void Apply(StudentUpdated @event)
+    public void Apply(MessageBody<StudentUpdatedData> @event)
     {
         this.Sequence = @event.Sequence;
         this.Name = @event.Data.Name;

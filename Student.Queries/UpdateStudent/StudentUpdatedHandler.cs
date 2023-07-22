@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using StudentQueries.Data;
 using StudentQueries.Exceptions.Update;
+using StudentQueries.Services;
 
 namespace StudentQueries.UpdateStudent;
 
-public class StudentUpdatedHandler : IRequestHandler<StudentUpdated, bool>
+public class StudentUpdatedHandler : IRequestHandler<MessageBody<StudentUpdatedData>, bool>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<StudentUpdatedHandler> _logger;
@@ -17,7 +18,7 @@ public class StudentUpdatedHandler : IRequestHandler<StudentUpdated, bool>
         _logger = logger;
     }
 
-    public async Task<bool> Handle(StudentUpdated request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(MessageBody<StudentUpdatedData> request, CancellationToken cancellationToken)
     {
             var student = await _unitOfWork.StudentRepository.GetByIdAsync(request.AggregateId);
             if (student is null)

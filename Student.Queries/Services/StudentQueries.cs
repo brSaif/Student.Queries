@@ -20,7 +20,7 @@ public class StudentQueries : Students.StudentsBase
         var result = await _mediator.Send(request.ToQuery()); 
         
         if (!result.Students.Any()) 
-                throw new RpcException(new Status(StatusCode.NotFound, "No entities matched your queries"));
+                throw new RpcException(new Status(StatusCode.NotFound, Phrases.NoResultMatchedTheQuery));
         
         return result.ToFilterResponse();
     }
@@ -29,7 +29,7 @@ public class StudentQueries : Students.StudentsBase
     {
         var result = await _mediator.Send(request.ToQuery())
             ?? throw new RpcException(
-                new Status(StatusCode.NotFound, $"Student with aggregate id: '{request.Id}' not found")); 
+                new Status(StatusCode.NotFound, String.Format(Phrases.StudentNotFoundException, request.Id))); 
 
         return result.ToFindResponse();
     }

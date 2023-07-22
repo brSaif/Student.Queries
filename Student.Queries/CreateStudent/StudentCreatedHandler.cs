@@ -2,11 +2,12 @@
 using StudentQueries.Data;
 using StudentQueries.Domain;
 using StudentQueries.Exceptions.Create;
+using StudentQueries.Services;
 using StudentQueries.UpdateStudent;
 
 namespace StudentQueries.CreateStudent;
 
-public class StudentCreatedHandler : IRequestHandler<StudentCreated, bool>
+public class StudentCreatedHandler : IRequestHandler<MessageBody<StudentCreatedData>, bool>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<StudentUpdatedHandler> _logger;
@@ -18,7 +19,7 @@ public class StudentCreatedHandler : IRequestHandler<StudentCreated, bool>
         _logger = logger;
     }
     
-    public async Task<bool> Handle(StudentCreated request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(MessageBody<StudentCreatedData> request, CancellationToken cancellationToken)
     {
             if (request.Sequence > 1)
             {

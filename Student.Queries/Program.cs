@@ -3,6 +3,7 @@ using Azure.Messaging.ServiceBus;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Serilog;
 using Student.Query.EventHistory;
 using StudentQueries.Data;
 using StudentQueries.Extensions;
@@ -10,7 +11,10 @@ using StudentQueries.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// builder.Services.AddHostedService<EventListener>();
+builder.Host.UseSerilog((ctx, cfg) =>
+{
+    cfg.Build(ctx.Configuration);
+});
 
 var connectionString = builder.Configuration.GetConnectionString("MssqlDatabase");
 

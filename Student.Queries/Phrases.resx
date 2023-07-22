@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="StudentNotFoundException" xml:space="preserve">
+        <value>Student with aggregate id: '{0}' not found</value>
+    </data>
+    <data name="StudentAlreadyUpdatedException" xml:space="preserve">
+        <value>Update request for student with aggregate id: '{0}' Already treated</value>
+    </data>
+    <data name="SequenceIsOutOfOrderException" xml:space="preserve">
+        <value>Update request id: '{0}' cannot be treated due to the event being out of order</value>
+    </data>
+    <data name="NoResultMatchedTheQuery" xml:space="preserve">
+        <value>No entities matched your queries</value>
+    </data>
+    <data name="StudentAlreadyExistException" xml:space="preserve">
+        <value>A student with '{0}' already exist</value>
+    </data>
+    <data name="InvalidSequenceNumberException" xml:space="preserve">
+        <value>Invalid sequence number '{0}'</value>
+    </data>
+</root>

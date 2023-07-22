@@ -56,12 +56,11 @@ public class TriggerHistoryBuild : TriggerBuild.TriggerBuildBase
     {
         foreach (EventMessage eventMessage in response.Events)
         {
-            var json = JsonConvert.SerializeObject(MessageBody.MapTo(eventMessage));
             
             var _ = eventMessage.Type switch
             {
-                nameof(StudentCreated) => await _mediator.Send(json.Deserialize<StudentCreated>()),
-                nameof(StudentUpdated) => await _mediator.Send(json.Deserialize<StudentUpdated>()),
+                nameof(EventType.StudentCreated) => await _mediator.Send(MessageBody<StudentCreatedData>.MapTo(eventMessage)),
+                nameof(EventType.StudentUpdated) => await _mediator.Send(MessageBody<StudentUpdatedData>.MapTo(eventMessage)),
                 _ => false
             };
         }

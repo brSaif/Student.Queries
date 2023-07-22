@@ -76,8 +76,8 @@ public class EventListener : IHostedService, IDisposable
         
         return argMessage.Subject switch
         {
-            nameof(StudentCreated) => await mediatr.Send(json.Deserialize<StudentCreated>()),
-            nameof(StudentUpdated) => await mediatr.Send(json.Deserialize<StudentUpdated>()),
+            nameof(EventType.StudentCreated) => await mediatr.Send(json.Deserialize<MessageBody<StudentCreatedData>>()),
+            nameof(EventType.StudentUpdated) => await mediatr.Send(json.Deserialize<MessageBody<StudentUpdatedData>>()),
             _ => false
         };
     }

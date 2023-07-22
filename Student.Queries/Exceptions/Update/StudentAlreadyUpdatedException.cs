@@ -2,6 +2,6 @@
 
 public class StudentAlreadyUpdatedException : StudentException
 {
-    public StudentAlreadyUpdatedException(Guid AggregateId) : base($"Update request for student with aggregate id: '{AggregateId}' Already treated")
+    public StudentAlreadyUpdatedException(Guid AggregateId) : base(string.Format(Phrases.StudentAlreadyUpdatedException, AggregateId))
     { }
 }
