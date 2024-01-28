@@ -19,7 +19,7 @@ public class UpdateStudent : TestBase
     [Fact]
     public async Task Update_WhenNoStudentWithTheGivenAggregateId_ThrowsApplicationException()
     {
-        StudentUpdated updatedStudent = new StudentUpdatedFaker()
+        var updatedStudent = new StudentUpdatedFaker()
             .RuleFor(
                 x => x.Data,
                 new StudentUpdatedDataFaker()
@@ -41,7 +41,7 @@ public class UpdateStudent : TestBase
     public async Task Update_WhenTheGivenSequenceNumberBiggerThanThePersistedSequenceInDb_SequenceIsOutOfOrderException()
     {
         var studentId = Guid.NewGuid();
-        StudentCreated createdStudent = new StudentCreatedFaker()
+        var createdStudent = new StudentCreatedFaker()
             .RuleFor(
                 x => x.Data,
                 new StudentCreatedDataFaker()
@@ -50,7 +50,7 @@ public class UpdateStudent : TestBase
             .RuleFor(x => x.Sequence, 1)
             .Generate();
         
-       StudentUpdated updateStudent2 = new StudentUpdatedFaker()
+       var updateStudent2 = new StudentUpdatedFaker()
             .RuleFor(
                 x => x.Data,
                 new StudentUpdatedDataFaker()
@@ -80,7 +80,7 @@ public class UpdateStudent : TestBase
     public async Task Update_WhenTheGivenSequenceNumberHigherThePersistedStudentSequenceByMoreThanOne_StudentAlreadyUpdatedException()
     {
         var studentId = Guid.NewGuid();
-        StudentCreated createdStudent = new StudentCreatedFaker()
+        var createdStudent = new StudentCreatedFaker()
             .RuleFor(
                 x => x.Data,
                 new StudentCreatedDataFaker()
@@ -89,7 +89,7 @@ public class UpdateStudent : TestBase
             .RuleFor(x => x.Sequence, 1)
             .Generate();
         
-        StudentUpdated updateStudent2 = new StudentUpdatedFaker()
+        var updateStudent2 = new StudentUpdatedFaker()
             .RuleFor(
                 x => x.Data,
                 new StudentUpdatedDataFaker()
@@ -121,7 +121,7 @@ public class UpdateStudent : TestBase
     public async Task Update_WhenGivenValidData_UpdatesTheStudent()
     {
         var studentId = Guid.NewGuid();
-        StudentCreated createdStudent = new StudentCreatedFaker()
+        var createdStudent = new StudentCreatedFaker()
             .RuleFor(
                 x => x.Data,
                 new StudentCreatedDataFaker()
@@ -130,7 +130,7 @@ public class UpdateStudent : TestBase
             .RuleFor(x => x.Sequence, 1)
             .Generate();
         
-        StudentUpdated updateStudent1 = new StudentUpdatedFaker()
+        var updateStudent1 = new StudentUpdatedFaker()
             .RuleFor(
                 x => x.Data,
                 new StudentUpdatedDataFaker()

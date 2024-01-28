@@ -1,8 +1,9 @@
 ﻿using StudentQueries.CreateStudent;
+using StudentQueries.Services;
 
 namespace StudentQueries.Tests.Faker;
 
-public class StudentCreatedFaker : PrivateFaker<StudentCreated>
+public class StudentCreatedFaker : PrivateFaker<MessageBody<StudentCreatedData>>
 {
     public StudentCreatedFaker()
     {

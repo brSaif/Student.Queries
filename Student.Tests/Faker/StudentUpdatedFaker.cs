@@ -1,8 +1,9 @@
-﻿using StudentQueries.UpdateStudent;
+﻿using StudentQueries.Services;
+using StudentQueries.UpdateStudent;
 
 namespace StudentQueries.Tests.Faker;
 
-public class StudentUpdatedFaker: PrivateFaker<StudentUpdated>
+public class StudentUpdatedFaker: PrivateFaker<MessageBody<StudentUpdatedData>>
 {
     public StudentUpdatedFaker()
     {

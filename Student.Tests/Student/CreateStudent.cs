@@ -19,7 +19,7 @@ public class CreateStudent : TestBase
     [Fact]
     public async Task Create_WhenGivenInvalidSequenceNumber_ThrowsApplicationException()
     {
-        StudentCreated createdStudent = new StudentCreatedFaker()
+        var  createdStudent = new StudentCreatedFaker()
             .RuleFor(
                 x => x.Data,
                 new StudentCreatedDataFaker()
@@ -42,7 +42,7 @@ public class CreateStudent : TestBase
     public async Task Create_WhenAStudentWithTheSameAggregateIdExists_ThrowsApplicationException()
     {
         var studentId = Guid.NewGuid();
-        StudentCreated createdStudent = new StudentCreatedFaker()
+        var createdStudent = new StudentCreatedFaker()
             .RuleFor(
                 x => x.Data,
                 new StudentCreatedDataFaker()
@@ -70,7 +70,7 @@ public class CreateStudent : TestBase
     public async Task Create_WhenGivenValidData_CreatesTheStudent()
     {
         var studentId = Guid.NewGuid();
-        StudentCreated createdStudent = new StudentCreatedFaker()
+        var createdStudent = new StudentCreatedFaker()
             .RuleFor(
                 x => x.Data,
                 new StudentCreatedDataFaker()
